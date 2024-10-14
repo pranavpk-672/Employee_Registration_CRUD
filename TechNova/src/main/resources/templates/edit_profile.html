@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Tech Nova</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #000000; /* Dark Grey Background */
+            color: white;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #131212;
+            padding: 1rem 2rem;
+        }
+
+        .navbar .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            color: #ff6347; /* Orange Color for Title */
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            align-items: center; /* Align items vertically */
+        }
+
+        .navbar ul li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #242323;
+            border-radius: 8px;
+            top: 100%;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar ul li:hover .profile-dropdown {
+            display: block;
+        }
+
+        .profile-dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #ff6347;
+        }
+
+        /* Form Section */
+        .form-container {
+            padding: 2rem;
+            background-color: #2b2a2a;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: 0px 4px 10px rgba(255, 99, 71, 0.5);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-header h1 {
+            color: #ff6347;
+            font-size: 2rem;
+        }
+
+        .form-container label {
+            display: block;
+            margin: 0.5rem 0 0.2rem 0;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="date"] {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 1rem;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .form-container button {
+            display: block;
+            width: 100%;
+            background-color: #ff6347;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #ff4500;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #131212;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer .footer-content .column {
+            width: 30%;
+            padding: 1rem;
+        }
+
+        footer .footer-content .column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #ff6347;
+        }
+
+        footer .footer-content .column p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        footer .footer-bottom {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            footer .footer-content .column {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="title">Tech Nova</div>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li>
+                <!-- Profile Picture Button -->
+   <a href="#" class="profile-button" style="display: inline-block; vertical-align: middle;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4-kmCX5SuK0g8t1B537G6Q9RGoxtWXrUw5w&s" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+</a>
+<p style="display: inline-block; margin-left: 10px;">Welcome, <span th:text="${user.firstName}">User</span>!</p>
+
+    <!-- Dropdown for Profile and Logout -->
+    <div class="profile-dropdown">
+        <a th:href="@{/profile}">Profile</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Edit Profile Form -->
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Edit Profile</h1>
+        </div>
+        <form th:action="@{/edit_profile}" th:object="${user}" method="post">
+            <label>First Name:</label>
+            <input type="text" th:field="*{firstName}" />
+
+            <label>Last Name:</label>
+            <input type="text" th:field="*{lastName}" />
+
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" />
+
+            <label>Phone:</label>
+            <input type="text" th:field="*{phone}" />
+
+            <label>Date of Birth:</label>
+            <input type="date" th:field="*{dob}" />
+
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="column">
+                <h4>About Us</h4>
+                <p>We are an IT solutions provider.</p>
+            </div>
+            <div class="column">
+                <h4>Contact Us</h4>
+                <p>Email: contact@technova.com</p>
+            </div>
+            <div class="column">
+                <h4>Follow Us</h4>
+                <p>Social Media Links</p>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2024 Tech Nova. All Rights Reserved.</div>
+    </footer>
+
+</body>
+
+</html>

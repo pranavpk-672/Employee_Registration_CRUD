@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tech Nova</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #000000; /* Dark Grey Background */
+            color: white;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #131212;
+            padding: 1rem 2rem;
+        }
+
+        .navbar .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            color: #ff6347; /* Orange Color for Title */
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 2rem;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347;
+        }
+
+        /* About Section */
+        .about-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #ff6347;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .about-container p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            margin: 3rem 0;
+            background-color: #2b2a2a;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        /* Flex container for mission and values */
+        .mission-values {
+            display: flex;
+            justify-content: space-around; /* Distribute space evenly */
+            align-items: flex-start; /* Align items to the start */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .mission, .values {
+            background-color: #333; /* Darker background for sections */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            margin: 1rem; /* Margin for spacing */
+            flex: 1 1 400px; /* Fixed minimum size and allow growth */
+            max-width: 400px; /* Set a max-width */
+        }
+
+        .mission h2, .values h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ff6347; /* Orange color for headings */
+            text-transform: uppercase; /* Make headings uppercase */
+        }
+
+        .mission p, .values p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Values Section List */
+        .values ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .values li {
+            margin-bottom: 0.5rem; /* Spacing between list items */
+            font-weight: bold; /* Bold text for values */
+            position: relative; /* Position for custom bullet */
+        }
+
+        .values li:before {
+            content: '✔️'; /* Custom bullet */
+            position: absolute;
+            left: -20px; /* Space for bullet */
+            color: #ff6347; /* Bullet color */
+        }
+
+        /* Team Section */
+        .team {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .team-member {
+            background-color: #242323;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem;
+            width: calc(25% - 2rem);
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(255, 99, 71, 0.3);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 10px rgba(255, 99, 71, 0.5);
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .team-member h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .team-member p {
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        .services {
+            margin: 3rem 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .service {
+            background-color: #2b2a2a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem;
+            width: calc(30% - 2rem);
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(255, 99, 71, 0.3);
+        }
+
+        .service:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(255, 99, 71, 0.5);
+        }
+
+        .service h3 {
+            margin-bottom: 0.5rem;
+            color: #ff6347;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #131212;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer .footer-content .column {
+            width: 30%;
+            padding: 1rem;
+        }
+
+        footer .footer-content .column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #ff6347;
+        }
+
+        footer .footer-content .column p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        footer .footer-bottom {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .team-member, .service {
+                width: calc(50% - 2rem);
+            }
+
+            .mission-values {
+                flex-direction: column; /* Stack vertically on smaller screens */
+                align-items: center; /* Center align the items */
+            }
+
+            .mission, .values {
+                max-width: 90%; /* Allow more width on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-member, .service {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            footer .footer-content .column {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="title">Tech Nova</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/custom_login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </div>
+
+    <!-- About Section -->
+    <br><br><br><br>
+    <div class="about-container">
+        <h1>About Us</h1>
+        <p>At Tech Nova, we are dedicated to providing innovative IT solutions that empower businesses to thrive in a digital world. Our team of experts leverages the latest technologies to deliver top-notch services tailored to your unique needs.</p>
+
+        <div class="mission-values">
+            <div class="section mission">
+                <h2>Our Mission</h2>
+                <p>To deliver high-quality IT services that enhance productivity and drive growth while maintaining a commitment to integrity and customer satisfaction. We strive to empower businesses by leveraging cutting-edge technologies and innovative solutions tailored to meet the unique needs of each client. Our dedicated team of experts works  , ensuring that our clients can focus on their core operations while we handle their IT challenges.</p>
+            </div>
+
+            <div class="section values">
+                <h2>Our Values</h2>
+                <p>We believe in:</p>
+                <ul>
+                    <li>Integrity: Upholding honesty and strong moral principles.</li>
+                    <li>Innovation: Embracing creativity and technology to find new solutions.</li>
+                    <li>Collaboration: Working together to achieve common goals.</li>
+                    <li>Excellence: Striving for the highest standards in everything we do.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Our Team</h2>
+        <div class="team">
+            <div class="team-member">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIn-gE6j6sjvg0ekFgFBIzVP5VdN3aBu9dLg&s" alt="Team Member 1">
+                <h4>John Abraham</h4>
+                <p>CEO</p>
+                <p>John is a visionary leader with over a decade of experience in the tech industry.</p>
+            </div>
+            <div class="team-member">
+                <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png" alt="Team Member 2">
+                <h4>Jane Smith</h4>
+                <p>CTO</p>
+                <p>Jane is a tech enthusiast with a passion for innovation and technology.</p>
+            </div>
+            <div class="team-member">
+                <img src="https://cdn-icons-png.flaticon.com/512/3001/3001758.png" alt="Team Member 3">
+                <h4>Michael Brown</h4>
+                <p>Lead Developer</p>
+                <p>Michael has a knack for coding and a keen eye for detail.</p>
+            </div>
+            <div class="team-member">
+                <img src="https://cdn-icons-png.flaticon.com/128/4042/4042292.png" alt="Team Member 4">
+                <h4>Emily Davis</h4>
+                <p>Project Manager</p>
+                <p>Emily is skilled in managing projects and ensuring they stay on track.</p>
+            </div>
+        </div>
+
+        <h2>Our Services</h2>
+        <div class="services">
+            <div class="service">
+                <h3>Web Development</h3>
+                <p>Building responsive and user-friendly websites to enhance your online presence.</p>
+            </div>
+            <div class="service">
+                <h3>Mobile Apps</h3>
+                <p>Creating innovative mobile applications tailored to your business needs.</p>
+            </div>
+            <div class="service">
+                <h3>IT Consulting</h3>
+                <p>Providing expert advice to help you make informed IT decisions.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="column">
+                <h4>About Us</h4>
+                <p>Tech Nova is a leading provider of innovative IT solutions for businesses of all sizes.</p>
+            </div>
+            <div class="column">
+                <h4>Contact Us</h4>
+                <p>Email: info@technova.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="column">
+                <h4>Follow Us</h4>
+                <p>Stay connected with us on social media!</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 Tech Nova. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>

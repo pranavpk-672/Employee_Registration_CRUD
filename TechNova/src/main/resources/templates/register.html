@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration - Tech Nova</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-image: url('https://cdn.pixabay.com/photo/2018/05/05/12/09/camera-3376230_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(19, 18, 18, 0.8);
+            padding: 1rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            color: #ff6347;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 2rem;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: rgba(43, 42, 42, 0.8);
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #ff6347;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ff6347;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #4f4f4f;
+            color: white;
+        }
+
+        input[type="submit"],
+        button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #e55347;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .global-error {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: rgba(19, 18, 18, 0.8);
+            color: white;
+            padding: 1rem 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .is-invalid {
+            border-color: red;
+        }
+
+        .password-requirements {
+            margin-top: 5px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .requirement {
+            color: gray;
+        }
+
+        .requirement.valid {
+            color: green;
+        }
+
+        .requirement.invalid {
+            color: red;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('firstName').addEventListener('input', validateName);
+            document.getElementById('lastName').addEventListener('input', validateName);
+            document.getElementById('dob').addEventListener('change', validateDOB);
+            document.getElementById('email').addEventListener('input', validateEmail);
+            document.getElementById('phone').addEventListener('input', validatePhone);
+            document.getElementById('password').addEventListener('input', validatePassword);
+            document.getElementById('confirmPassword').addEventListener('input', validateConfirmPassword);
+        });
+
+        function showError(field, message) {
+            const errorElement = field.nextElementSibling;
+            field.classList.add('is-invalid');
+            errorElement.textContent = message;
+        }
+
+        function clearError(field) {
+            const errorElement = field.nextElementSibling;
+            field.classList.remove('is-invalid');
+            errorElement.textContent = '';
+        }
+
+        function validateName(event) {
+            const field = event.target;
+            const value = field.value.trim();
+            const pattern = /^[A-Za-z\s]+$/;
+            if (!pattern.test(value)) {
+                showError(field, "Only letters and spaces are allowed.");
+            } else {
+                clearError(field);
+            }
+        }
+
+        function validateDOB(event) {
+            const field = event.target;
+            const dob = field.value;
+            const today = new Date().toISOString().split('T')[0];
+            if (dob >= today) {
+                showError(field, "Date of birth cannot be in the future.");
+            } else {
+                clearError(field);
+            }
+        }
+
+        function validateEmail(event) {
+            const field = event.target;
+            const email = field.value.trim();
+            const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.(com|co)$/;
+            if (!pattern.test(email)) {
+                showError(field, "Please enter a valid email address ending in .com or .co.");
+            } else {
+                clearError(field);
+            }
+        }
+
+        function validatePhone(event) {
+            const field = event.target;
+            const phone = field.value.trim();
+            const pattern = /^[1-9][0-9]{9}$/;
+            if (!pattern.test(phone)) {
+                showError(field, "Phone number must be 10 digits and cannot start with 0.");
+            } else {
+                clearError(field);
+            }
+        }
+
+        function validatePassword(event) {
+            const field = event.target;
+            const password = field.value;
+            const lengthPattern = /.{8,}/;
+            const uppercasePattern = /[A-Z]/;
+            const lowercasePattern = /[a-z]/;
+            const numberPattern = /\d/;
+            const symbolPattern = /[@$!%*?&#]/;
+
+            const requirements = document.querySelectorAll('.requirement');
+            requirements[0].classList.toggle('valid', lengthPattern.test(password));
+            requirements[1].classList.toggle('valid', uppercasePattern.test(password));
+            requirements[2].classList.toggle('valid', lowercasePattern.test(password));
+            requirements[3].classList.toggle('valid', numberPattern.test(password));
+            requirements[4].classList.toggle('valid', symbolPattern.test(password));
+
+            requirements.forEach(req => {
+                if (!req.classList.contains('valid')) {
+                    req.classList.add('invalid');
+                } else {
+                    req.classList.remove('invalid');
+                }
+            });
+
+            if (password === '') {
+                requirements.forEach(req => req.classList.remove('valid', 'invalid'));
+            }
+        }
+
+        function validateConfirmPassword(event) {
+            const passwordField = document.getElementById('password');
+            const confirmField = event.target;
+            const errorMessage = "Passwords do not match.";
+
+            if (confirmField.value !== passwordField.value) {
+                showError(confirmField, errorMessage);
+            } else {
+                clearError(confirmField);
+            }
+        }
+
+        function validateForm(event) {
+            const form = event.target;
+            let isValid = true;
+
+            form.querySelectorAll('input').forEach(input => {
+                if (input.checkValidity() === false || input.classList.contains('is-invalid')) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                event.preventDefault();
+                document.getElementById('globalError').textContent = "Please correct all fields before submitting.";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="title">Tech Nova</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Service</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="custom_login">Login</a></li>
+            
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2 class="logo">User Registration</h2>
+        <div class="error global-error" id="globalError"></div>
+
+        <form th:action="@{/register}" method="post" onsubmit="return validateForm(event);">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <div class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <div class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+                <div class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+                <div class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error-message"></div>
+                <ul class="password-requirements">
+                    <li class="requirement">At least 8 characters long</li>
+                    <li class="requirement">At least one uppercase letter</li>
+                    <li class="requirement">At least one lowercase letter</li>
+                    <li class="requirement">At least one number</li>
+                    <li class="requirement">At least one special character (@$!%*?&#)</li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <div class="error-message"></div>
+            </div>
+            <input type="submit" value="Register">
+        </form>
+        
+        <!-- Link to login page -->
+    <p>Already have an account? <a href="custom_login">Login here</a></p>
+    
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Tech Nova. All rights reserved.</p>
+    </footer>
+</body>
+</html>

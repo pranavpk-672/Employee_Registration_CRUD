@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Tech Nova</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #000000; /* Dark Grey Background */
+            color: white;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #131212;
+            padding: 1rem 2rem;
+        }
+
+        .navbar .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            color: #ff6347; /* Orange Color for Title */
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 2rem;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #ff6347;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .contact-container p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #2b2a2a;
+            color: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .form-group button {
+            padding: 0.7rem 1.5rem;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background-color: #e55347;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #131212;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        footer .footer-content .column {
+            width: 30%;
+            padding: 1rem;
+        }
+
+        footer .footer-content .column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #ff6347;
+        }
+
+        footer .footer-content .column p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        footer .footer-bottom {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            footer .footer-content .column {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="title">Tech Nova</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="/custom_login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-container">
+        <h1>Contact</h1>
+        <p>We value your input and are here to assist you. Whether you have a question, need support, or want to provide feedback, feel free to reach out to us. Your satisfaction is our priority!</p>
+
+        <p>Our dedicated team is ready to help you with your inquiries. Please fill out the form below, and we’ll respond as soon as possible.</p>
+
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Send Message</button>
+            </div>
+        </form>
+
+        <h2>Contact Information</h2>
+        <p>If you prefer, you can also reach us via:</p>
+        <p>Email: <a href="mailto:info@technova.com" style="color: #ff6347;">info@technova.com</a></p>
+        <p>Phone: <strong>+1 (555) 012-3456</strong></p>
+        <p>Follow us on our social media platforms to stay updated with our latest news and offerings!</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="column">
+                <h4>About Us</h4>
+                <p>Tech Nova is dedicated to providing exceptional IT services and solutions to businesses of all sizes. Our team of experts is here to help you navigate the complexities of technology.</p>
+            </div>
+            <div class="column">
+                <h4>Contact</h4>
+                <p>Email: info@technova.com</p>
+                <p>Phone: +1 (555) 012-3456</p>
+            </div>
+            <div class="column">
+                <h4>Follow Us</h4>
+                <p>Connect with us on social media for updates.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 Tech Nova. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>

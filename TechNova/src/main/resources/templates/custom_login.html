@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login - Tech Nova</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-image: url('https://cdn.pixabay.com/photo/2018/05/05/12/09/camera-3376230_1280.jpg'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(19, 18, 18, 0.8); /* Semi-transparent Background */
+            padding: 1rem 2rem;
+            position: relative;
+            z-index: 10; /* Ensure it stays above other elements */
+        }
+
+        .navbar .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            color: #ff6347; /* Orange Color for Title */
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 2rem;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347;
+        }
+
+        /* Login Container */
+        .container {
+            max-width: 400px;
+            margin: 100px auto; /* Increased margin for better spacing */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: rgba(43, 42, 42, 0.8); /* Darker Semi-transparent Background for Login */
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #ff6347; /* Logo Color */
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+        }
+
+        a {
+            color: #ff6347; /* Orange Color for Links */
+            text-decoration: none;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ff6347; /* Label Color */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #4f4f4f; /* Darker Input Background */
+            color: white;
+        }
+
+        input[type="submit"] {
+            background-color: #ff6347; /* Button Color */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e55347; /* Darker Button on Hover */
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(19, 18, 18, 0.8); /* Semi-transparent Background */
+            color: white;
+            padding: 1rem 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            z-index: 10; /* Ensure it stays above other elements */
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="title">Tech Nova</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <a class="logo" th:href="@{/}">Tech Nova</a>
+        <h2>Login</h2>
+        
+        
+        
+        <form th:action="@{/perform_login}" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="username" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+            <div>
+                <input type="submit" value="Login" />
+            </div>
+            <p>If you are not registered, <a th:href="@{/register}">Register here</a>.</p>
+            <div th:if="${param.error}" class="error">
+                <p>Invalid email or password</p>
+            </div>
+            <div th:if="${param.logout}" class="success">
+                <p>You have been logged out</p>
+            </div> <!-- Closing div for success message -->
+            
+            
+
+            
+            
+        </form>
+        <p><a th:href="@{/}">Click here to go to the index page</a></p> <!-- Added link to index page -->
+        
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Tech Nova. All rights reserved.</p>
+        <p>Contact us at: <a href="mailto:info@technova.com" style="color: #ff6347;">info@technova.com</a></p>
+    </footer>
+</body>
+
+</html>
